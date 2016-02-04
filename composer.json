@@ -1,0 +1,21 @@
+{
+  "name": "pomek/tdd-string-calculator",
+  "description": "Solution of Code Kata - String Calculator",
+  "authors": [
+    {
+      "name": "Kamil Piechaczek",
+      "email": "github@pomek.pl"
+    }
+  ],
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^2.4"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src"
+    }
+  }
+}
