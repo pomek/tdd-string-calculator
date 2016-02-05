@@ -51,4 +51,44 @@ class StringCalculatorSpec extends ObjectBehavior
     {
         $this->add("1\n2,3")->shouldBe(6);
     }
+
+    function it_adds_numbers_with_different_delimeter()
+    {
+        $this->add("//;\n1;2")->shouldBe(3);
+        $this->add("//,\n3,4")->shouldBe(7);
+        $this->add("//$\n5$6")->shouldBe(11);
+    }
+
+    function it_throws_an_exception_when_given_string_contains_negative_numbers()
+    {
+        $exception = new \InvalidArgumentException('Negative numbers are not supported: -1, -3');
+
+        $this->shouldThrow($exception)->duringAdd("-1,2,-3");
+        $this->shouldThrow($exception)->duringAdd("//;\n-1;2;-3");
+    }
+
+    function it_ignores_numbers_bigger_than_1000()
+    {
+        $this->add('2,1001')->shouldBe(2);
+        $this->add('2,1000')->shouldBe(1002);
+    }
+
+    function it_adds_numbers_with_different_length_of_delimeter()
+    {
+        $this->add("//[;;;]\n1;;;2")->shouldBe(3);
+        $this->add("//[,,,]\n3,,,4")->shouldBe(7);
+        $this->add("//[$$$]\n5$$$6")->shouldBe(11);
+    }
+
+    function it_adds_numbers_with_differents_delimeters()
+    {
+        $this->add("//[*][%]\n1*2%3")->shouldBe(6);
+        $this->add("//[*][%][#]\n1*2%3#4")->shouldBe(10);
+    }
+
+    function it_adds_numbers_with_differents_delimeters_and_unknown_length_of_delimeter()
+    {
+        $this->add("//[*][%%]\n1*2%%3")->shouldBe(6);
+        $this->add("//[*][%%][###]\n1*2%%3###4")->shouldBe(10);
+    }
 }
