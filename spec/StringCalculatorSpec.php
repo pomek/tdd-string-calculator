@@ -32,7 +32,7 @@ class StringCalculatorSpec extends ObjectBehavior
         $this->add("5,4")->shouldReturn(9);
     }
 
-    function it_returns_10_for_1_and_2_and_3()
+    function it_returns_6_for_1_and_2_and_3()
     {
         $this->add("1,2,3")->shouldBe(6);
     }
